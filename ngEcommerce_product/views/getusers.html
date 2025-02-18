@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="userRegistrationModule">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body ng-controller="UserRegistrationController">
+  <div class="container mt-5">
+    <h2>User List</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Email Auth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.emailAuth ? 'Yes' : 'No' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="../angular-route.min.js"></script>
+  <script src="../dist/auth/registration.module.js"></script>
+  <script src="../dist/auth/controller/userregistration.controller.js"></script>
+  <script src="../dist/auth/services/registration.service.js"></script>
+  <script src="../dist/app.module.js"></script>
+  <!-- Add other script files as needed -->
+</body>
+</html>

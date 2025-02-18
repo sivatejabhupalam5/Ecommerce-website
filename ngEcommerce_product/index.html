@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="onlineShopping">
+<head>
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+    <script src="/angular.min.js"></script>
+    <script src="/angular-route.min.js"></script>
+    <script src="./dist/auth/auth.module.js"></script>
+    <script src="./dist/auth/services/auth.service.js"></script>
+    <script src="./dist/auth/controller/auth.controller.js"></script>
+    <script src="./dist/auth/registration.module.js"></script>
+    <script src="./dist/auth/controller/userregistration.controller.js"></script>
+    <script src="./dist/auth/services/registration.service.js"></script>
+    <script src="./dist/productcatalog/product.module.js"></script>
+    <script src="./dist/productcatalog/services/product.service.js"></script>
+    <script src="./dist/productcatalog/controller/product.controller.js"></script>
+    <script src="./dist/shoppingcart/shoppingcart.module.js"></script>
+    <script src="./dist/shoppingcart/controller/shoppingcart.controller.js"></script>
+    <script src="./dist/app.module.js"></script>
+</head>
+
+<body">
+    <div ng-if="!isLoginPage && !isRegistrationPage ">
+        <div ng-include="'views/header.html'"></div>
+    </div>
+    <div ng-view></div>
+    <div ng-if="!isLoginPage && !isRegistrationPage">
+        <div ng-include="'views/footer.html'"></div>
+    </div>
+    <script>
+        angular.module('onlineShopping').run(['$rootScope', '$location', function($rootScope, $location) {
+            $rootScope.$on('$routeChangeSuccess', function() {
+                $rootScope.isLoginPage = $location.path() === '/auth';
+                $rootScope.isRegistrationPage = $location.path() === '/auth/registration';
+            });
+        }]);
+    </script>
+</body>
+</html>

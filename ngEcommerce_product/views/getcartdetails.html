@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="shoppingcartmodule">
+<head>
+    <title>Cart Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .btn-group {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body ng-controller="ShoppingCartController">
+    <div class="container">
+        <h1>Cart Details</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in cart track by item.id">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | currency }}</td>
+                    <td>{{ item.quantity * item.price | currency }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-sm" ng-click="increaseQuantity(item)">+</button>
+                            <button class="btn btn-secondary btn-sm" ng-click="decreaseQuantity(item)">-</button>
+                            <button class="btn btn-danger btn-sm" ng-click="removeFromCart(item)">Remove</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3">Total</td>
+                    <td>{{ total | currency }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-danger" ng-click="clearCart()">Clear Cart</button>
+    </div>
+</body>
+</html>
+							   
+																										   
+		   
+			  
+						  
+		 
+			
+								
+		 
+			   
+						
+									  
+		 
+				
+						  
+							 
+										  
+		 
+			
+									  
+						 
+		 
+				  
+									  
+		 
+					
+							  
+		 
+					
+						  
+					 
+		 
+			
+	   
+											 
+						   
+							 
+										   
+				   
+					
+										 
+									 
+								  
+								  
+									
+					 
+					
+				   
+											 
+											
+												
+														
+																		
+						
+											   
+																											   
+																												 
+																												 
+							  
+						 
+					 
+									  
+											  
+												   
+							 
+					 
+					
+				
+																				 
+		  
+	   
+	   

@@ -1,0 +1,92 @@
+<head>
+    <style>
+        /* Add basic styling for the header */
+        .header {
+            background-color: #9000ff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .cart-icon {
+            font-size: 20px;
+        }
+
+        .nav-cust {
+            color: white;
+            font-size: larger;
+            text-decoration: none;
+        }
+
+        .nav-cust:hover {
+            color: #ffcc00;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<header class="header row" ng-app="shoppingcartmodule" ng-controller="ShoppingCartController">
+    <!-- Logo Section -->
+    <div class="logo col-lg-2">
+        <a href="#!/"><img style="height: 8vh; width: 8vh;" src="https://cdn4.iconfinder.com/data/icons/shopping-and-commerce-outline-color/512/shopping_commerce_21-1024.png" alt="Logo"></a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar col-lg-6">
+        <input type="text" placeholder="Search for products...">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="col-lg-4">
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a class="nav-cust" href="#!/shoppingcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span>{{ totalquantity }}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-cust" href="#!/productcatalog"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-cust" href="#!/auth/registration/getusers"><i class="fa fa-users" aria-hidden="true"></i> Users List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-cust" href="#!/productcatalog/addproduct"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-cust" href="" ng-click="logout()"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>

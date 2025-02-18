@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="productModule">
+<head>
+    <title>Product Catalog</title>
+    <script src="../angular.min.js"></script>
+    <!-- <script src="../dist/productcatalog/productcatalog.module.js"></script>
+    <script src="../dist/productcatalog/service/product.service.js"></script>
+    <script src="../dist/productcatalog/controller/product.controller.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../styles/Getlist.css"/>
+    
+</head>
+<body ng-controller="productController">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Product Catalog</h1>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="product in products">
+                <div class="card mb-4">
+                    <img class="card-img-top" ng-src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 100%; height: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">Price: ${{ product.price }}</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" ng-click="decreaseQuantity(product)">-</button>
+                            </div>
+                            <input type="number" class="form-control text-center" ng-model="product.quantity" min="1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" ng-click="increaseQuantity(product)">+</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block" ng-click="addToCart(product)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

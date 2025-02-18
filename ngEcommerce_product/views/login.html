@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>plant store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../styles/loginpage.css">
+    <style>
+      
+    </style>
+</head>
+<body ng-app="authmodule" ng-controller="AuthController">
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Tfl Store</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#!/auth/registration">
+                    <i class="fas fa-user-plus"></i> Register
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Login</h2>
+        <form name="loginForm" ng-submit="onValidate()">
+            <div class="form-group">
+                <label for="emailid">Email</label>
+                <input type="email" class="form-control" id="emailid" name="email" ng-model="user.email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" ng-model="user.password" required>
+            </div>
+            <div class="form-group">
+                <span id="validation-message" class="validation-message"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="btnlogin">Login</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="../dist/app.module.js"></script>
+</body>
+</html>

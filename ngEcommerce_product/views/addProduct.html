@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="productModule">
+<head>
+    <title>Product Catalog</title>
+    <script src="../angular.min.js"></script>
+    <script src="../angular.min.js"></script>
+    <script src="../dist/productcatalog/productcatalog.module.js"></script>
+    <script src="../dist/productcatalog/service/product.service.js"></script>
+    <script src="../dist/productcatalog/controller/product.controller.js"></script>
+    
+   <link rel="stylesheet" href="../styles/Getlist.css"/>
+</head>
+<body ng-controller="productController" style="background-color: rgb(54, 142, 218);">
+ 
+    <div class="form-container">
+        <h2>Add a new product</h2>
+        <form ng-submit="addProduct()">
+            <label for="productId">ID:</label>
+            <input type="text" id="productId" ng-model="newProduct.id" ng-hide required >
+            <br>
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" ng-model="newProduct.name" required>
+            <br>
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" ng-model="newProduct.price" required>
+            <br>
+            <label for="productImage">Image URL:</label>
+            <input type="file" id="productImage" ng-model="newProduct.image" required>
+            <br>
+            <button type="submit">Add Product</button>
+        </form>
+   
+    </div>
+</body>
+</html>
