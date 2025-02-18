@@ -46,7 +46,13 @@ var ProductService = /** @class */ (function () {
         var deferred = this.$q.defer();
         try {
             var cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.push(product);
+            var existingProduct = cart.find(function (item) { return item.id === product.id; });
+            if (existingProduct) {
+                existingProduct.quantity += product.quantity;
+            }
+            else {
+                cart.push(product);
+            }
             localStorage.setItem('cart', JSON.stringify(cart));
             deferred.resolve({ message: 'Product added to cart' });
         }

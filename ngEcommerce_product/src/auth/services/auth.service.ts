@@ -43,10 +43,10 @@ export class AuthService {
     return localStorage.getItem('userRole') === 'admin';
   }
 
-  logout(): void {
+  logout(): any {
     localStorage.setItem('isAuthenticated', 'false');
     localStorage.removeItem('userRole');
-   
+
   }
 }
 

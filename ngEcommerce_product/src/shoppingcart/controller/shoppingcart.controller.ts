@@ -1,5 +1,6 @@
 import angular from 'angular';
 import { ProductService } from '../../productcatalog/services/product.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 interface ICartItem {
   id: number;
@@ -25,7 +26,7 @@ interface IShoppingCartScope extends angular.IScope {
 export class ShoppingCartController {
   static $inject = ['$scope', 'ProductService', 'AuthService', '$location'];
 
-  constructor(private $scope: IShoppingCartScope, private productService: ProductService, private authService: any, private $location: angular.ILocationService) {
+  constructor(private $scope: IShoppingCartScope, private productService: ProductService, private AuthService: AuthService, private $location: angular.ILocationService) {
     this.$scope.cart = [];
     this.$scope.total = 0;
     this.$scope.totalquantity = 0;
@@ -99,7 +100,7 @@ export class ShoppingCartController {
   }
 
   logout() {
-    this.authService.logout().then(() => {
+    this.AuthService.logout().then(() => {
       this.$location.path('#!/auth');
     });
   }

@@ -1,8 +1,10 @@
 
 var ShoppingCartController = /** @class */ (function () {
-    function ShoppingCartController($scope, productService) {
+    function ShoppingCartController($scope, productService, AuthService, $location) {
         this.$scope = $scope;
         this.productService = productService;
+        this.AuthService = AuthService;
+        this.$location = $location;
         this.$scope.cart = [];
         this.$scope.total = 0;
         this.$scope.totalquantity = 0;
@@ -12,6 +14,7 @@ var ShoppingCartController = /** @class */ (function () {
         this.$scope.decreaseQuantity = this.decreaseQuantity.bind(this);
         this.$scope.clearCart = this.clearCart.bind(this);
         this.$scope.calculateTotal = this.calculateTotal.bind(this);
+        this.$scope.logout = this.logout.bind(this);
         this.loadCart();
     }
     ShoppingCartController.prototype.loadCart = function () {
@@ -64,9 +67,15 @@ var ShoppingCartController = /** @class */ (function () {
     };
     ShoppingCartController.prototype.calculateTotal = function () {
         this.$scope.total = this.$scope.cart.reduce(function (sum, item) { return sum + item.price * item.quantity; }, 0);
-        this.$scope.totalquantity = this.$scope.cart.length;
+        this.$scope.totalquantity = this.$scope.cart.reduce(function (sum, item) { return sum + item.quantity; }, 0);
     };
-    ShoppingCartController.$inject = ['$scope', 'ProductService'];
+    ShoppingCartController.prototype.logout = function () {
+        var _this = this;
+        this.AuthService.logout().then(function () {
+            _this.$location.path('#!/auth');
+        });
+    };
+    ShoppingCartController.$inject = ['$scope', 'ProductService', 'AuthService', '$location'];
     return ShoppingCartController;
 }());
 
