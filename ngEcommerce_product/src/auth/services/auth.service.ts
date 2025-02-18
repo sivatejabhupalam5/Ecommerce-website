@@ -43,10 +43,10 @@ export class AuthService {
     return localStorage.getItem('userRole') === 'admin';
   }
 
-  logout(): any {
+  logout():Promise<string> {
     localStorage.setItem('isAuthenticated', 'false');
     localStorage.removeItem('userRole');
-
+return this.$q.resolve('Logged out successfully');
   }
 }
 

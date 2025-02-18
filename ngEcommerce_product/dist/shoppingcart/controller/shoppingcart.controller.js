@@ -71,7 +71,7 @@ var ShoppingCartController = /** @class */ (function () {
     };
     ShoppingCartController.prototype.logout = function () {
         var _this = this;
-        this.AuthService.logout().then(function () {
+        var output = this.AuthService.logout().then(function () {
             _this.$location.path('#!/auth');
         });
     };

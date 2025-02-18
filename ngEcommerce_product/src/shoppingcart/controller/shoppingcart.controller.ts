@@ -100,7 +100,7 @@ export class ShoppingCartController {
   }
 
   logout() {
-    this.AuthService.logout().then(() => {
+    var output=this.AuthService.logout().then(() => {
       this.$location.path('#!/auth');
     });
   }

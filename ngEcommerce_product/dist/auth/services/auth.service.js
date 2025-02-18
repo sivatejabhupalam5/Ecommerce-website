@@ -34,6 +34,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.logout = function () {
         localStorage.setItem('isAuthenticated', 'false');
         localStorage.removeItem('userRole');
+        return this.$q.resolve('Logged out successfully');
     };
     AuthService.$inject = ['$q', '$window'];
     return AuthService;
