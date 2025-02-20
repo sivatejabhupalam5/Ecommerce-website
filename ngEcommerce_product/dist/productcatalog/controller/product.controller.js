@@ -47,18 +47,49 @@ var ProductController = /** @class */ (function () {
             product.quantity--;
         }
     };
+    // Updated addProduct function with image handling
     ProductController.prototype.addProduct = function () {
         var _this = this;
         var newProduct = __assign({}, this.$scope.newProduct);
-        this.productService.addProduct(newProduct)
-            .then(function (response) {
-            _this.products.push(newProduct);
-            _this.$scope.products = _this.products;
-            console.log('Product added successfully:', response);
-        })
-            .catch(function (error) {
-            console.error('Failed to add product', error);
-        });
+        // Check if an image is selected
+        if (newProduct.image && newProduct.image instanceof File) {
+            // Create FormData object to send product data and image file
+            var formData = new FormData();
+            // Append the product data (excluding the image URL)
+            formData.append('product', JSON.stringify({
+                name: newProduct.name,
+                price: newProduct.price,
+                quantity: newProduct.quantity,
+            }));
+            // Append the image file
+            formData.append('image', newProduct.image);
+            // Call product service to add the product
+            this.productService.addProduct(formData)
+                .then(function (response) {
+                _this.products.push(newProduct);
+                _this.$scope.products = _this.products;
+                console.log('Product added successfully:', response);
+                document.getElementById('validation-message').innerText = 'Product added successfully!';
+            })
+                .catch(function (error) {
+                console.error('Failed to add product', error);
+                document.getElementById('validation-message').innerText = 'Failed to add product!';
+            });
+        }
+        else {
+            // If no image file is selected, proceed with the normal request without the image
+            this.productService.addProduct(newProduct)
+                .then(function (response) {
+                _this.products.push(newProduct);
+                _this.$scope.products = _this.products;
+                console.log('Product added successfully:', response);
+                document.getElementById('validation-message').innerText = 'Product added successfully!';
+            })
+                .catch(function (error) {
+                console.error('Failed to add product', error);
+                document.getElementById('validation-message').innerText = 'Failed to add product!';
+            });
+        }
     };
     ProductController.$inject = ['$scope', 'ProductService'];
     return ProductController;

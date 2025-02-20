@@ -15,8 +15,8 @@
     <div class="form-container">
         <h2>Add a new product</h2>
         <form ng-submit="addProduct()">
-            <label for="productId">ID:</label>
-            <input type="text" id="productId" ng-model="newProduct.id" ng-hide required >
+            <label for="productId" style="display: none;">ID:</label>
+            <input type="text" id="productId" style="display: none;" ng-model="newProduct.id" >
             <br>
             <label for="productName">Name:</label>
             <input type="text" id="productName" ng-model="newProduct.name" required>
@@ -28,6 +28,9 @@
             <input type="file" id="productImage" ng-model="newProduct.image" required>
             <br>
             <button type="submit">Add Product</button>
+            <div class="form-group">
+                <span id="validation-message" class="validation-message" ></span>
+            </div>
         </form>
    
     </div>

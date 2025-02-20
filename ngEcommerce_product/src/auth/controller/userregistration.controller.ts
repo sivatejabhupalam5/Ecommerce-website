@@ -1,18 +1,7 @@
 import * as angular from 'angular';
 import { RegistrationService } from '../services/registration.service';
+import { IUserRegistrationScope } from '../interfaces/Iuserregistration';
 
-interface IUserRegistrationScope extends angular.IScope {
-  registrationData: {
-    name: string;
-    email: string;
-    role: string;
-    password: string;
-    emailAuth: boolean;
-  };
-  onSubmit: (form: angular.IFormController) => void;
-  getUsers: () => void;
-  users: any[];
-}
 
 export class UserRegistrationController {
   static $inject = ['$scope', 'RegistrationService','$window'];
@@ -38,11 +27,14 @@ export class UserRegistrationController {
       this.RegistrationService.register(this.$scope.registrationData)
         .then(response => {
           console.log('Registration successful', response);
+          document.getElementById('validation-message-register')!.innerText = 'Registration successful!';
           this.$window.location.href  = '#!/Auth';
+
           this.getUsers();
         })
         .catch(error => {
           console.error('Registration failed', error);
+          document.getElementById('validation-message-register')!.innerText = 'Registration failed!';
         });
     }
   }

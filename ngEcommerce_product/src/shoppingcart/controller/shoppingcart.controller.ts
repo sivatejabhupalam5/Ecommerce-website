@@ -1,27 +1,8 @@
 import angular from 'angular';
 import { ProductService } from '../../productcatalog/services/product.service';
 import { AuthService } from '../../auth/services/auth.service';
-
-interface ICartItem {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
-interface IShoppingCartScope extends angular.IScope {
-  cart: ICartItem[];
-  total: number;
-  totalquantity: number;
-  addToCart: (product: ICartItem) => void;
-  removeFromCart: (product: ICartItem) => void;
-  increaseQuantity: (product: ICartItem) => void;
-  decreaseQuantity: (product: ICartItem) => void;
-  clearCart: () => void;
-  calculateTotal: () => void;
-  logout: () => void;
-}
+import { ICartItem } from '../interfaces/ICartItem';
+import { IShoppingCartScope } from '../interfaces/IShoppingCartScope';
 
 export class ShoppingCartController {
   static $inject = ['$scope', 'ProductService', 'AuthService', '$location'];

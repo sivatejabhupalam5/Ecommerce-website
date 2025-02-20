@@ -1,14 +1,7 @@
 import * as angular from 'angular';
 import { AuthService } from '../services/auth.service';
+import { IAuthScope } from '../interfaces/IAuthscope';
 
-interface IAuthScope extends angular.IScope {
-  user: {
-    email: string;
-    password: string;
-  };
-  onValidate: () => void;
-  loginForm: angular.IFormController;
-}
 
 export class AuthController {
   static $inject = ['$scope', 'AuthService', '$window'];

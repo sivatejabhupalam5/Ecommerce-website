@@ -22,11 +22,13 @@ var UserRegistrationController = /** @class */ (function () {
             this.RegistrationService.register(this.$scope.registrationData)
                 .then(function (response) {
                 console.log('Registration successful', response);
+                document.getElementById('validation-message-register').innerText = 'Registration successful!';
                 _this.$window.location.href = '#!/Auth';
                 _this.getUsers();
             })
                 .catch(function (error) {
                 console.error('Registration failed', error);
+                document.getElementById('validation-message-register').innerText = 'Registration failed!';
             });
         }
     };

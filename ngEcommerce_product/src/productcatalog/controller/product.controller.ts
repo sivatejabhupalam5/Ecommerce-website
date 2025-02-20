@@ -1,23 +1,7 @@
 import * as angular from 'angular';
+import { IProduct } from '../interfaces/IProduct';
+import { IProductScope } from '../interfaces/IProductscope';
 import { ProductService } from '../services/product.service';
-
-interface IProduct {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
-interface IProductScope extends angular.IScope {
-  products: IProduct[];
-  newProduct: IProduct;
-  addToCart: (product: IProduct) => void;
-  increaseQuantity: (product: IProduct) => void;
-  decreaseQuantity: (product: IProduct) => void;
-  addProduct: () => void;
-}
-
 export class ProductController {
   static $inject = ['$scope', 'ProductService'];
 
@@ -60,17 +44,52 @@ export class ProductController {
     }
   }
 
+  // Updated addProduct function with image handling
   addProduct() {
     const newProduct = { ...this.$scope.newProduct };
-    this.productService.addProduct(newProduct)
-      .then(response => {
-        this.products.push(newProduct);
-        this.$scope.products = this.products;
-        console.log('Product added successfully:', response);
-      })
-      .catch(error => {
-        console.error('Failed to add product', error);
-      });
+
+    // Check if an image is selected
+    if (newProduct.image && newProduct.image instanceof File) {
+      // Create FormData object to send product data and image file
+      const formData = new FormData();
+      
+      // Append the product data (excluding the image URL)
+      formData.append('product', JSON.stringify({
+        name: newProduct.name,
+        price: newProduct.price,
+        quantity: newProduct.quantity,
+      }));
+
+      // Append the image file
+      formData.append('image', newProduct.image);
+
+      // Call product service to add the product
+      this.productService.addProduct(formData)
+        .then(response => {
+          this.products.push(newProduct);
+          this.$scope.products = this.products;
+          console.log('Product added successfully:', response);
+          document.getElementById('validation-message')!.innerText = 'Product added successfully!';
+        })
+        .catch(error => {
+          console.error('Failed to add product', error);
+          document.getElementById('validation-message')!.innerText = 'Failed to add product!';
+        });
+
+    } else {
+      // If no image file is selected, proceed with the normal request without the image
+      this.productService.addProduct(newProduct)
+        .then(response => {
+          this.products.push(newProduct);
+          this.$scope.products = this.products;
+          console.log('Product added successfully:', response);
+          document.getElementById('validation-message')!.innerText = 'Product added successfully!';
+        })
+        .catch(error => {
+          console.error('Failed to add product', error);
+          document.getElementById('validation-message')!.innerText = 'Failed to add product!';
+        });
+    }
   }
 }
 
